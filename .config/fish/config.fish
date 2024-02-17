@@ -7,4 +7,6 @@ alias eza="eza -Ga --hyperlink --color always --icons always"
 alias ls="eza"
 alias cat="bat"
 alias reboot="systemctl reboot"
+alias nano="micro"
+alias pacman="paru"
 zoxide init fish | source
