@@ -1,0 +1,23 @@
+
+oh-my-posh init pwsh --config 'C:\Users\kittech\AppData\Local\Programs\oh-my-posh\themes\powerlevel10k_lean.omp.json' | Invoke-Expression
+function EZA {
+    eza.exe -Ga --hyperlink --color always --icons always @args
+}
+function NANO {
+    foreach ($path in @args) {
+        if (!($path -match '^"(.*?)"$')) {
+            micro $path
+        } else {
+            $modifiedPath = $path -replace ' ', '` '
+            micro $modifiedPath
+        }
+    }
+}
+
+Set-Alias -Name ls -Value EZA -Option AllScope
+Set-Alias -Name cat -Value bat -Option AllScope
+Set-Alias -Name cd -Value z -Option AllScope
+Set-Alias -Name nano -Value NANO -Option AllScope
+Import-Module PSReadLine
+Set-PSReadLineOption -PredictionSource History
+Invoke-Expression (& { (zoxide init powershell | Out-String) })
